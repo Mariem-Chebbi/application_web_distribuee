@@ -8,9 +8,13 @@
         <option value="$PROJECT_DIR$/ApiGateway/pom.xml" />
         <option value="$PROJECT_DIR$/Configserver/pom.xml" />
         <option value="$PROJECT_DIR$/confserver/pom.xml" />
+
         <option value="$PROJECT_DIR$/Pet_Care_Appointment/pom.xml" />
         <option value="$PROJECT_DIR$/Pet_Care_veterinaire/pom.xml" />
         <option value="$PROJECT_DIR$/Pet_Care_Service/pom.xml" />
+
+        <option value="$PROJECT_DIR$/UserMicroservice/pom.xml" />
+
       </list>
     </option>
     <option name="ignoredFiles">
