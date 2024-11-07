@@ -11,6 +11,7 @@
         <module name="ApiGateway" />
         <module name="confserver" />
         <module name="pet_care_alimentation" />
+        <module name="UserMicroservice" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -22,6 +23,7 @@
       <module name="ApiGateway" options="-parameters" />
       <module name="Configserver" options="-parameters" />
       <module name="Eureka" options="-parameters" />
+      <module name="UserMicroservice" options="-parameters" />
       <module name="confserver" options="-parameters" />
       <module name="pet_care_alimentation" options="-parameters" />
     </option>
