@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import tn.esprit.Pet_Care_Appointment.Entity.Appointment;
-import tn.esprit.Pet_Care_Appointment.Service.AppointmentService;
+import tn.esprit.Pet_Care_Appointment.Service.IService.IAppointmentService;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("/appointments")
 public class AppointmentController {
     @Autowired
-    private AppointmentService appointmentService;
+    private IAppointmentService appointmentService;
 
     @GetMapping
     public List<Appointment> getAllAppointments() {
