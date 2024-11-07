@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Eureka" />
         <module name="ApiGateway" />
+        <module name="confserver" />
         <module name="pet_care_alimentation" />
       </profile>
     </annotationProcessing>
@@ -21,6 +22,7 @@
       <module name="ApiGateway" options="-parameters" />
       <module name="Configserver" options="-parameters" />
       <module name="Eureka" options="-parameters" />
+      <module name="confserver" options="-parameters" />
       <module name="pet_care_alimentation" options="-parameters" />
     </option>
   </component>

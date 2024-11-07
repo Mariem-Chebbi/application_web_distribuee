@@ -8,6 +8,7 @@
         <option value="$PROJECT_DIR$/pet_care_alimentation/pom.xml" />
         <option value="$PROJECT_DIR$/ApiGateway/pom.xml" />
         <option value="$PROJECT_DIR$/Configserver/pom.xml" />
+        <option value="$PROJECT_DIR$/confserver/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
