@@ -11,8 +11,8 @@
     <groupId>com.example</groupId>
     <artifactId>PetCare</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Pet_Care_Service</name>
-    <description>Pet_Care_Service</description>
+    <name>Pet_Care_Veterinaire</name>
+    <description>Pet_Care_Veterinaire</description>
     <url/>
     <licenses>
         <license/>
