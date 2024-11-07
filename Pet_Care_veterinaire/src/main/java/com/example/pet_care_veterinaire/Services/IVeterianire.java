@@ -1,8 +1,8 @@
-package com.example.pet_care_service.Services;
+package com.example.pet_care_veterinaire.Services;
 
 import java.util.List;
 
-import com.example.pet_care_service.entities.Veterinaire;
+import com.example.pet_care_veterinaire.entities.Veterinaire;
 
 public interface  IVeterianire {
 

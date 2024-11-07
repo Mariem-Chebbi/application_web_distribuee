@@ -1,7 +1,7 @@
-package com.example.pet_care_service.Services;
+package com.example.pet_care_veterinaire.Services;
 
-import com.example.pet_care_service.Repositories.ServiceeRepo;
-import com.example.pet_care_service.entities.Servicee;
+import com.example.pet_care_veterinaire.Repositories.ServiceeRepo;
+import com.example.pet_care_veterinaire.entities.Servicee;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

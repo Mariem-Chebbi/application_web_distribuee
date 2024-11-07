@@ -1,4 +1,5 @@
-package com.example.pet_care_service.entities;
+package com.example.pet_care_veterinaire.entities;
+
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,19 +13,16 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Servicee {
+
+
+public class Veterinaire {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
      private  Long id ;
      private  String Nom ;
-     private  Type  type ;  //
-     private  float Prix ;
-     private  int duree ;
-     private  Unite unite ;
-    public void setSpecialite(Specialite specialite) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setSpecialite'");
-    }
+     private  String  Prenom ;  
+     private  String Email;
+     private  Specialite specialite ;
+    
 }
-
-
