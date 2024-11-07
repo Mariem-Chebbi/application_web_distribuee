@@ -11,16 +11,32 @@ import java.util.List;
 @RestController
 @RequestMapping("/appointments")
 public class AppointmentController {
+
     @Autowired
     private IAppointmentService appointmentService;
+
+    @PostMapping
+    public Appointment createAppointment(@RequestBody Appointment appointment) {
+        return appointmentService.saveAppointment(appointment);
+    }
+
+    @GetMapping("/{id}")
+    public Appointment getAppointmentById(@PathVariable Long id) {
+        return appointmentService.getAppointmentById(id);
+    }
 
     @GetMapping
     public List<Appointment> getAllAppointments() {
         return appointmentService.getAllAppointments();
     }
 
-    @PostMapping
-    public Appointment createAppointment(@RequestBody Appointment appointment) {
-        return appointmentService.saveAppointment(appointment);
+    @PutMapping("/{id}")
+    public Appointment updateAppointment(@PathVariable Long id, @RequestBody Appointment appointment) {
+        return appointmentService.updateAppointment(id, appointment);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteAppointment(@PathVariable Long id) {
+        appointmentService.deleteAppointment(id);
     }
 }
