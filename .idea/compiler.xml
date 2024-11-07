@@ -7,9 +7,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Pet_Care_Appointment" />
+        <module name="Pet_Care_Veterinaire" />
+        <module name="confserver" />
+        <module name="Pet_Care_Service" />
         <module name="Eureka" />
         <module name="ApiGateway" />
-        <module name="confserver" />
         <module name="pet_care_alimentation" />
       </profile>
     </annotationProcessing>
@@ -22,6 +25,9 @@
       <module name="ApiGateway" options="-parameters" />
       <module name="Configserver" options="-parameters" />
       <module name="Eureka" options="-parameters" />
+      <module name="Pet_Care_Appointment" options="-parameters" />
+      <module name="Pet_Care_Service" options="-parameters" />
+      <module name="Pet_Care_Veterinaire" options="-parameters" />
       <module name="confserver" options="-parameters" />
       <module name="pet_care_alimentation" options="-parameters" />
     </option>
