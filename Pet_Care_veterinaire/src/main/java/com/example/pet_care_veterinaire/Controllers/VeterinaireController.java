@@ -1,9 +1,9 @@
-package com.example.pet_care_service.Controllers;
+package com.example.pet_care_veterinaire.Controllers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import com.example.pet_care_service.Services.IVeterianire;
-import com.example.pet_care_service.entities.Veterinaire;
+import com.example.pet_care_veterinaire.Services.IVeterianire;
+import com.example.pet_care_veterinaire.entities.Veterinaire;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
-package com.example.pet_care_service.Repositories;
+package com.example.pet_care_veterinaire.Repositories;
 
-import com.example.pet_care_service.entities.Servicee;
+import com.example.pet_care_veterinaire.entities.Servicee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

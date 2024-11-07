@@ -1,7 +1,7 @@
-package com.example.pet_care_service.Services;
+package com.example.pet_care_veterinaire.Services;
 
-import com.example.pet_care_service.Repositories.VeterinaireRepo;
-import com.example.pet_care_service.entities.Veterinaire;
+import com.example.pet_care_veterinaire.Repositories.VeterinaireRepo;
+import com.example.pet_care_veterinaire.entities.Veterinaire;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
