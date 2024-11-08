@@ -38,5 +38,9 @@ public class AnimalController {
         return iAnimalService.listAnimals();
     }
 
+    @PutMapping("/affecter/{idAnimal}/{idPlan}")
+    public Animal affecterPlanAnimal(@PathVariable Long idAnimal,@PathVariable Long idPlan){
+        return iAnimalService.affecterPlanAnimal(idAnimal,idPlan);
+    }
 
 }

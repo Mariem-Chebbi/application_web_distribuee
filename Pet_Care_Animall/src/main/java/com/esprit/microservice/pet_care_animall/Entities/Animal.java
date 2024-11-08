@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 
 @Entity
 @Data
@@ -19,6 +21,8 @@ public class Animal {
     private String race;
     private int age;
     private String sexe;
+    @ElementCollection
+    private List<Long> listPlanAlimentation;
 
     @OneToOne(mappedBy = "animal", cascade = CascadeType.ALL)
     private DossierMedical dossierMedical ;
