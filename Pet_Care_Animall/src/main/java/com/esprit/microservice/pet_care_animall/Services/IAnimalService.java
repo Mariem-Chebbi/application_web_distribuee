@@ -10,5 +10,6 @@ public interface IAnimalService {
     void deleteAnimal (Long id);
     List<Animal> listAnimals ();
     Animal getAnimalById (Long id);
+    public Animal affecterPlanAnimal(Long idAnimal,Long idPlan);
 
 }

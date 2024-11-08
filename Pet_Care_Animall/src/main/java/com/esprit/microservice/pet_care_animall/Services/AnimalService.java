@@ -1,5 +1,7 @@
 package com.esprit.microservice.pet_care_animall.Services;
 
+import com.esprit.microservice.pet_care_animall.Alimentation.Alimentation;
+import com.esprit.microservice.pet_care_animall.DTO.PlanAlimentaire;
 import com.esprit.microservice.pet_care_animall.Entities.Animal;
 import com.esprit.microservice.pet_care_animall.Entities.DossierMedical;
 import com.esprit.microservice.pet_care_animall.Repositories.AnimalRepository;
@@ -8,6 +10,7 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -15,6 +18,7 @@ import java.util.List;
 public class AnimalService implements IAnimalService{
     private AnimalRepository animalRepository;
     private DossierMedicalRepository dossierMedicalRepository;
+    private Alimentation alimentation;
 
     public Animal addAnimal (Animal animal){
         return animalRepository.save(animal);
@@ -42,5 +46,17 @@ public class AnimalService implements IAnimalService{
 
     public Animal getAnimalById(Long id) {
         return animalRepository.findById(id).orElse(null);
+    }
+
+    public Animal affecterPlanAnimal(Long idAnimal,Long idPlan){
+        Animal animal =  animalRepository.findById(idAnimal).orElse(null) ;
+        PlanAlimentaire planAlimentaire = alimentation.getById(idPlan);
+        if ( animal.getListPlanAlimentation()==null) {
+           animal.setListPlanAlimentation(new ArrayList<>());
+            animal.getListPlanAlimentation().add(planAlimentaire.getId());
+        }else {
+            animal.getListPlanAlimentation().add(planAlimentaire.getId());
+        }
+        return animalRepository.save(animal);
     }
 }
