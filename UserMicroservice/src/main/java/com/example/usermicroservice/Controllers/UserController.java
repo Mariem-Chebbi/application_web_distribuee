@@ -1,13 +1,14 @@
 package com.example.usermicroservice.Controllers;
 
+import com.example.usermicroservice.entities.User;
 import com.example.usermicroservice.services.KeyCloackUserService;
+import com.example.usermicroservice.services.UserService;
+import jakarta.ws.rs.core.Response;
 import lombok.extern.slf4j.Slf4j;
+import org.keycloak.admin.client.Keycloak;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -19,10 +20,13 @@ public class UserController {
     @Autowired
     private KeyCloackUserService keycloakUserService;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/users")
     public List<UserRepresentation> getAllUsers() {
 
-        log.info(" KEY CLOACK {}",keycloakUserService.keycloak.realms().findAll());
+
 
         return keycloakUserService.getAllUsers() ;
     }
@@ -36,5 +40,15 @@ public class UserController {
     public String Hello() {
 
         return "Hello";
+    }
+
+    @PostMapping
+    @RequestMapping("/register")
+    public Response createUser (@RequestBody User user) {
+        System.out.println("REGISTERING");
+        UserRepresentation userRep = userService.mapAdminRep(user);
+        Keycloak keycloak = KeyCloackUserService.getInstance();
+        Response response = keycloak.realm("master").users().create(userRep);
+        return Response.ok (user).build();
     }
 }
