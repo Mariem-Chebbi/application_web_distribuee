@@ -1,0 +1,21 @@
+
+K
+Pet_Care_Service/Dockerfile,5\6\561d6c405dabfe5540016c4f5b9c7fa8c89a4f1e
+O
+Pet_Care_veterinaire/Dockerfile,e\4\e4f4cf8f1e14a21c35e0a7310724f1b8b4f304e7
+K
+pet_care_event/package.json,3\b\3b30937397daaed5e3770d5d444f7f6a1caf92eb
+E
+ApiGateway/Dockerfile,1\4\146ce03ec3809afd0bdad7933ede21ac5f1f2c01
+E
+confserver/Dockerfile,e\0\e0b3170239b0cec83e62962399f21d738ccd754c
+A
+Eureka/Dockerfile,1\b\1bc0b3f03a1227161f9b657821638edb35596ce2
+z
+JApiGateway/src/main/java/com/example/apigateway/ApiGatewayApplication.java,8\5\850d225d593c045966188d1a45d10e61c97b0d6d
+z
+Jconfserver/src/main/java/com/example/confserver/ConfserverApplication.java,7\f\7fa81530c6947211459db0d4240486b39c630f63
+K
+UserMicroservice/.gitignore,8\7\87c51fefaa8d23d6a9a1ea340e64127076e23843
+K
+Pet_Care_Service/.gitignore,4\3\43875e8d3b465c1d5a9eaf79ec0277cfb20ac55b
