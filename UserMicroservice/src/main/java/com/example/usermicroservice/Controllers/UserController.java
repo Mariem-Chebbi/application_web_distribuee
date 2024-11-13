@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 @Slf4j
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/keycloak")
 public class UserController {
 
@@ -50,5 +51,36 @@ public class UserController {
         Keycloak keycloak = KeyCloackUserService.getInstance();
         Response response = keycloak.realm("master").users().create(userRep);
         return Response.ok (user).build();
+    }
+
+    @PostMapping
+    @RequestMapping("/createnormaluser")
+    public Response createNormalUser (@RequestBody User user) {
+        System.out.println("REGISTERING");
+        UserRepresentation userRep = userService.mapUserRep(user);
+        Keycloak keycloak = KeyCloackUserService.getInstance();
+        Response response = keycloak.realm("master").users().create(userRep);
+        return Response.ok (user).build();
+    }
+    @PostMapping
+    @RequestMapping("/createvet")
+    public Response createVetUser (@RequestBody User user) {
+        System.out.println("REGISTERING");
+        UserRepresentation userRep = userService.mapVetrep(user);
+        Keycloak keycloak = KeyCloackUserService.getInstance();
+        Response response = keycloak.realm("master").users().create(userRep);
+        return Response.ok (user).build();
+    }
+    @GetMapping
+    @RequestMapping("/getuser/{userId}")
+    public UserRepresentation getUserbyId (@PathVariable String userId) {
+
+        return keycloakUserService.getUserById(userId) ;
+    }
+
+    @PostMapping
+    @RequestMapping("/affecterAnimal/{userId}/{animalId}")
+    public String AffecterAnimal (@PathVariable String userId,@PathVariable Long animalId) {
+       return keycloakUserService.AffectAnimal(userId,animalId);
     }
 }

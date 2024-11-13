@@ -13,9 +13,9 @@ import org.springframework.web.reactive.config.WebFluxConfigurer;
         @Override
         public void addCorsMappings(CorsRegistry registry) {
             registry.addMapping("/**")
-                    .allowedOrigins()
+                    .allowedOrigins("http://localhost:4200")
                     .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                    .allowedHeaders("Content-Type", "Access-Control-Allow-Headers", "Authorization", "X-Requested-With")
+                    .allowedHeaders("Content-Type", "Access-Control-Allow-Headers","Access-Control-Allow-Origin", "Authorization", "X-Requested-With")
                     .allowCredentials(true);
         }
     }
