@@ -9,6 +9,7 @@ import tn.esprit.Pet_Care_Appointment.Service.IService.IAppointmentService;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/appointments")
 public class AppointmentController {
 

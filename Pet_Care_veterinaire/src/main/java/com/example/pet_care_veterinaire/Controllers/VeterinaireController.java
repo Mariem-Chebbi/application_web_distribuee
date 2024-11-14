@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/Veterinaire")
+@CrossOrigin(origins = "*")
 @AllArgsConstructor
 public class VeterinaireController {
 

@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@CrossOrigin(origins = "*")
 @RequestMapping("/DossierMedical")
 public class DossierMedicalController {
     private IDossierMedicalService iDossierMedicalService;

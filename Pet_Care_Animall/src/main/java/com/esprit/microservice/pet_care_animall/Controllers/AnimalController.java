@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@CrossOrigin(origins = "*")
 @RequestMapping("/Animal")
 public class AnimalController {
     private IAnimalService iAnimalService;

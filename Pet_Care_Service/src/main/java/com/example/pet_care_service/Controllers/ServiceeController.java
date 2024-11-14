@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/service")
+@CrossOrigin(origins = "*")
 @AllArgsConstructor
 public class ServiceeController {
     private IServicee iServicee ;

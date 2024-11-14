@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 @Slf4j
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 @RequestMapping("/keycloak")
 public class UserController {
 
@@ -82,5 +82,11 @@ public class UserController {
     @RequestMapping("/affecterAnimal/{userId}/{animalId}")
     public String AffecterAnimal (@PathVariable String userId,@PathVariable Long animalId) {
        return keycloakUserService.AffectAnimal(userId,animalId);
+    }
+
+    @GetMapping("/user/email")
+    public UserRepresentation getUserByEmail(@RequestParam("email") String email) {
+        log.info("Fetching user with email {}", email);
+        return keycloakUserService.getUserByEmail(email);
     }
 }

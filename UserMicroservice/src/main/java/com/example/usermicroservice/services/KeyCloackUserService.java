@@ -105,6 +105,19 @@ public class KeyCloackUserService {
     }
 
 
+    public UserRepresentation getUserByEmail(String email) {
+        List<UserRepresentation> users = keycloak.realm(realmName)
+                .users()
+                .search(null, null, null, email, null, null);
+
+        if (!users.isEmpty()) {
+            return users.get(0);  // Assumes email is unique and returns the first match
+        } else {
+            throw new NoSuchElementException("User with email " + email + " not found.");
+        }
+    }
+
+
 
 
 }
