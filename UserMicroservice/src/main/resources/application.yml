@@ -1,0 +1,29 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: usermicroservice
+  cloud:
+    config:
+      enabled: true
+      uri: http://localhost:8888
+  config:
+    import: "optional:configserver:http://localhost:8888/"
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    eureka-service-url:
+      defaultZone: http://localhost:8761/eureka
+
+keycloak:
+  auth-server-url: http://127.0.0.1:8080
+  realm: JobBoardKeycloack
+  clientid: user
+  credentials:
+    secret: N6qiHV6RzRKDfvzUab8uzoYtzC8jOdW1
+  username: admin
+  password: admin
+  granttype: password

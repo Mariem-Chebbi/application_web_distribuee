@@ -53,6 +53,12 @@ public class UserController {
         return Response.ok (user).build();
     }
 
+    @GetMapping("/user/email")
+    public UserRepresentation getUserByEmail(@RequestParam("email") String email) {
+        log.info("Fetching user with email {}", email);
+        return keycloakUserService.getUserByEmail(email);
+    }
+
     @PostMapping
     @RequestMapping("/createnormaluser")
     public Response createNormalUser (@RequestBody User user) {

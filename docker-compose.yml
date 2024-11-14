@@ -1,64 +1,215 @@
 version: "3.9"
+
 services:
-  pet_care_alimentation:
+  # Microservice Alimentation
+  pet-care-alimentation:
     build: ./pet_care_alimentation
-    image: "alimentation"
-    container_name: alimentationContainer
+    image: mariemchebbi/pet_care_alimentation
+    container_name: pet_care_alimentation
     ports:
-      - "8091:8090"
+      - "8090:8090"
     environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery:8762/eureka
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/petcare_alimentation_db?createDatabaseIfNotExist=true
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_APPLICATION_NAME=pet-care-alimentation
+      - SPRING_CLOUD_CONFIG_ENABLED=true
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8888
+      - SERVER_PORT=8090
     restart: unless-stopped
     depends_on:
       - eureka
       - mysql-db
+      - config-server
 
-  pet_care_service:
+  # Microservice Service
+  pet-care-service:
     build: ./Pet_Care_Service
-    image: "service"
-    container_name: serviceContainer
+    image: mariemchebbi/pet_care_service
+    container_name: pet_care_service
     ports:
-      - "8093:8092"
+      - "9100:9100"
     environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery:8762/eureka
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:3306/petcaredb?createDatabaseIfNotExist=true
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=root 
+      - SPRING_APPLICATION_NAME=pet-care-service
+      - SPRING_CLOUD_CONFIG_ENABLED=true
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8888
+      - SERVER_PORT=9100
     restart: unless-stopped
     depends_on:
       - eureka
       - mysql-db
+      - config-server
 
+  # Microservice Animal
+  pet-care-animal:
+    build: ./pet_care_animal
+    image: mariemchebbi/pet_care_animal
+    container_name: pet_care_animal
+    ports:
+      - "8099:8099"
+    environment:
+      - SPRING_APPLICATION_NAME=pet-care-animal
+      - SPRING_H2_CONSOLE_ENABLED=true
+      - SPRING_H2_CONSOLE_PATH=/h2
+      - SPRING_CLOUD_CONFIG_ENABLED=true
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8888
+    restart: unless-stopped
+    depends_on:
+      - eureka
+      - config-server
+
+  # Microservice Appointment
+  pet-care-appointment:
+    build: ./Pet_Care_Appointment
+    image: mariemchebbi/pet_care_appointment
+    container_name: pet-care-appointment
+    ports:
+      - "8093:8093"
+    environment:
+      - SPRING_CLOUD_CONFIG_ENABLED=true
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8888
+      - SPRING_APPLICATION_NAME=pet-care-appointment
+      - SPRING_DATASOURCE_URL=jdbc:h2:mem:pet_care_appointment
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SERVER_PORT=8093
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://eureka:8761/eureka
+      - EUREKA_CLIENT_REGISTER_WITH_EUREKA=true
+      - EUREKA_CLIENT_FETCH_REGISTRY=true
+      - LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_WEB=DEBUG
+      - LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_CLOUD=DEBUG
+      - LOGGING_LEVEL_COM_NETFLIX_EUREKA=DEBUG
+      - WELCOME_MESSAGE=Welcome to spring cloud config-server, This is candidate service
+      - SERVER_SERVLET_CONTEXT_PATH=/appointment
+    restart: unless-stopped
+    depends_on:
+      - eureka
+      - config-server
+
+  # Microservice Express
+  express-microservice:
+    image: mariemchebbi/pet_care_event
+    container_name: pet_care_event
+    environment:
+      - CONFIG_SERVER_URL=http://config-server:8888
+      - SERVICE_NAME=express-microservice
+      - SERVICE_PROFILE=dev
+      - PORT=3000
+      - EUREKA_CLIENT_SERVICE_URL=http://eureka:8761/eureka
+    ports:
+      - "3000:3000"
+    depends_on:
+      - eureka
+      - config-server
+
+  # Microservice Veterinaire
+  pet-care-veterinaire:
+    build: ./Pet_Care_Veterinaire
+    image: mariemchebbi/pet_care_veterinaire
+    container_name: pet_care_veterinaire
+    ports:
+      - "8095:8095"
+    environment:
+      - SPRING_APPLICATION_NAME=pet-care-veterinaire
+      - SPRING_CLOUD_CONFIG_ENABLED=true
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8888
+      - SERVER_PORT=8095
+    restart: unless-stopped
+    depends_on:
+      - eureka
+      - config-server
+      - mysql-db
+
+  # User Microservice
+  user-microservice:
+    build: ./UserMicroservice
+    image: mariemchebbi/pet_care_user
+    container_name: pet_care_user
+    environment:
+      - SERVER_PORT=8083
+      - SPRING_APPLICATION_NAME=user-microservice
+      - KEYCLOAK_AUTH_SERVER_URL=http://keycloak:8080/auth
+      - KEYCLOAK_REALM=JobBoardKeycloak
+      - KEYCLOAK_CLIENTID=user
+      - KEYCLOAK_CREDENTIALS_SECRET=N6qiHV6RzRKDfvzUab8uzoYtzC8jOdW1
+      - KEYCLOAK_USERNAME=admin
+      - KEYCLOAK_PASSWORD=admin
+      - KEYCLOAK_GRANTYPE=password
+      - SPRING_CLOUD_CONFIG_ENABLED=true
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8888
+    ports:
+      - "8083:8083"
+    depends_on:
+      - config-server
+      - eureka
+      - keycloak
+
+  # Keycloak
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    environment:
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
+    ports:
+      - "8080:8080"
+
+  # Config Server
+  config-server:
+    build: ./confserver
+    image: confserver
+    environment:
+      - CONFIG_SERVER_PORT=8888
+      - SPRING_CLOUD_CONFIG_SERVER_NATIVE_SEARCH_LOCATIONS=file:/configurations
+      - SPRING_PROFILES_ACTIVE=native
+      - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://eureka:8761/eureka
+      - EUREKA_CLIENT_REGISTER_WITH_EUREKA=true
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./application_web_distribuee/confserver/src/main/resources/configurations:/configurations
+    depends_on:
+      - eureka
+
+  # Eureka Server
   eureka:
     build: ./Eureka
-    image: "eureka"
-    container_name: "eurekaContainer"
+    image: mariemchebbi/eureka
+    container_name: "eureka"
     ports:
-      - "8762:8761"
-    hostname: discovery
-
-  gateway:
-    build: ./ApiGateway
-    image: "apigateway"
-    container_name: "apigatewayContainer"
-    ports:
-      - "8083:8082"
+      - "8761:8761"
+    hostname: eureka
     environment:
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery:8762/eureka
-      - spring_cloud_gateway_routes[0]_id=service
-      - spring_cloud_gateway_routes[0]_uri=http://service:8093
-      - spring_cloud_gateway_routes[0]_predicates[0]=Path=/service/**
-      - spring_cloud_gateway_routes[1]_id=alimentation
-      - spring_cloud_gateway_routes[1]_uri=http://alimentation:8091
-      - spring_cloud_gateway_routes[1]_predicates[0]=Path=/alimentation/**
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka:8761/eureka/
+
+  # API Gateway
+  api-gateway:
+    build: ./ApiGateway
+    image: mariemchebbi/apigateway
+    container_name: "apigateway"
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_APPLICATION_NAME=api-gateway
+      - SPRING_CLOUD_CONFIG_ENABLED=true
+      - SPRING_CLOUD_CONFIG_URI=http://config-server:8888
+      - SPRING_CONFIG_IMPORT=optional:configserver:http://config-server:8888
+      - SERVER_PORT=8082
     depends_on:
       - eureka
-      - pet_care_alimentation
-      - pet_care_service
+      - pet-care-alimentation
+      - pet-care-service
+      - pet-care-animal
+      - pet-care-appointment
+      - config-server
+      - express-microservice
+      - pet-care-veterinaire
+      - user-microservice
 
+  # MySQL Database
   mysql-db:
     image: "mysql:5.6"
     container_name: "mysql-db"

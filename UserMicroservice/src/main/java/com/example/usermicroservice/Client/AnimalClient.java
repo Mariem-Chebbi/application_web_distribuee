@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(name="pet-care-animal", url = "http://localhost:8099")
 
 public interface AnimalClient {
-    @GetMapping("/Animal/{id}")
+    @GetMapping("/animal/Animal/{id}")
     public Animal getById (@PathVariable Long id) ;
 }

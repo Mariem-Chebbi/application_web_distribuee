@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@CrossOrigin("*")
 @RequestMapping("/PlanAlimentaire")
 public class PlanAlimentaireController {
     private IPlanAlimentaireService iPlanAlimentaireService;

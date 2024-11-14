@@ -20,6 +20,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Configserver" target="17" />
+      <module name="gateway" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -33,6 +34,7 @@
       <module name="Pet_Care_Veterinaire" options="-parameters" />
       <module name="UserMicroservice" options="-parameters" />
       <module name="confserver" options="-parameters" />
+      <module name="gateway" options="-parameters" />
       <module name="pet_care_alimentation" options="-parameters" />
     </option>
   </component>

@@ -72,6 +72,39 @@ public class KeyCloackUserService {
                 .toRepresentation();
     }
 
+    public List<UserRepresentation> getUserByAttributes(String attributeName, String attributeValue) {
+        List<UserRepresentation> users = keycloak.realm(realmName)
+                .users()
+                .list();
+
+        List<UserRepresentation> matchingUsers = new ArrayList<>();
+
+        for (UserRepresentation user : users) {
+            Map<String, List<String>> attributes = user.getAttributes();
+            if (attributes != null && attributes.containsKey(attributeName)) {
+                List<String> values = attributes.get(attributeName);
+                if (values.contains(attributeValue)) {
+                    matchingUsers.add(user);
+                }
+            }
+        }
+
+        return matchingUsers;
+    }
+
+    public UserRepresentation getUserByEmail(String email) {
+        List<UserRepresentation> users = keycloak.realm(realmName)
+                .users()
+                .search(null, null, null, email, null, null);
+
+        if (!users.isEmpty()) {
+            return users.get(0);  // Assumes email is unique and returns the first match
+        } else {
+            throw new NoSuchElementException("User with email " + email + " not found.");
+        }
+    }
+
+
     public List<UserRepresentation> getAllUsers() {
         return keycloak.realm(realmName)
                 .users()
